@@ -6,7 +6,7 @@ BUFFER_SIZE = 1024
 
 # creazione del socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-sock.bind(SERVER_IP, SERVER_PORT)
+sock.bind((SERVER_IP, SERVER_PORT))
 
 print("Server in attesa di messaggi...")
 
