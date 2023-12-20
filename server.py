@@ -15,6 +15,6 @@ while True:
     data, addr=sock.recvfrom(BUFFER_SIZE)
     print("Messaggio ricevute del client {addr}: {data.decode()}")
 
-    #invio di una risposta al client
+    #invio di una risposta al clien
     reply = "pong"
     sock.sendto(reply.encode(), addr)
