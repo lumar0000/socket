@@ -22,23 +22,24 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock_server:
     op=dati['operazione']
     n2=dati['secondoNumero']
     with sock_service as sock_client:
-        tot=0
-        if not dati:
-            break
-        if op == '+':
-            tot = n1 + n2
-        if op == '-':
-            tot = n1 - n2
-        if op == '*':
-            tot = n1 * n2
-        elif op == "/":
-            if n2 != 0:
-                tot = n1 / n2
-            else:
-                tot = "Impossibile"
-        elif op == "%":
-            tot = n1 % n2
+        while True:
+            tot=0
+            if not dati:
+                break
+            if op == '+':
+                tot = n1 + n2
+            if op == '-':
+                tot = n1 - n2
+            if op == '*':
+                tot = n1 * n2
+            elif op == "/":
+                if n2 != 0:
+                    tot = n1 / n2
+                else:
+                    tot = "Impossibile"
+            elif op == "%":
+                tot = n1 % n2
 
-        # Stampa il messaggio ricevuto e invia una risposta al client
-        print(f"Ricevuto messaggio dal client {sock_service}: {dati}")
-        sock_service.sendall(str(tot).encode())
+            # Stampa il messaggio ricevuto e invia una risposta al client
+            print(f"Ricevuto messaggio dal client {sock_service}: {dati}")
+            sock_service.sendall(str(tot).encode())

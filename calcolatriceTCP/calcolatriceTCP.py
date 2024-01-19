@@ -10,6 +10,8 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock_service:
     primoNumero = float(input("Inserisci il primo numero: "))
     operazione = input("Inserisci l'operazione(simbolo)")
     secondoNumero = float(input("Inserisci il secondo numero: "))
+    if(operazione == 0):
+      break
     messaggio = {'primoNumero' : primoNumero,
                 'operazione' : operazione,
                 'secondoNumero' : secondoNumero}
