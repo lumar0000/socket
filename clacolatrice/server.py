@@ -13,12 +13,13 @@ print("Server in attesa di messaggi...")
 
 while True:
     #ricezione dei dati del client
-    data, addr=cs.recv(1024)
+    data, addr=cs.recvfrom(1024)
+    tot = 0
 
     if not data:
         break
     data=data.decode()
-    data.json(data)
+    data = json.loads(data)
     n1=data['primoNumero']
     op=data['operazione']
     n2=data['secondoNumero']
@@ -29,7 +30,12 @@ while True:
         tot = n1 - n2
     if op == '*':
         tot = n1 * n2
-    if op == '/':
-        tot = n1 / n2
+    elif op == "/":
+        if n2 != 0:
+            tot = n1 / n2
+        else:
+            tot = "Impossibile"
+    elif op == "%":
+        tot = n1 % n2
 
-    cs.sendto(tot.encode(), addr)
+    cs.sendto(str(tot).encode(), addr)

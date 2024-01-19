@@ -1,19 +1,23 @@
-import json
 import socket
+import json
 
-# d = {'alpha': 1, 'beta': 2}
-# s = json.dumps(d)
-# open("out.json","w").write(s)
+SERVER_IP = "127.0.0.1"
+SERVER_PORT = 5005
+BUFFER_SIZE = 1024
 
-s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+s = socket.socket(socket.AF_INET, socket. SOCK_DGRAM)
+while True:
+    #Blocco 1
+    primoNumero = float(input("Inserisci il primo numero: "))
+    operazione = input("Inserisci l'operazione(simbolo)")
+    secondoNumero = float(input("Inserisci il secondo numero: "))
+    messaggio = {'primoNumero' : primoNumero,
+                'operazione' : operazione,
+                'secondoNumero' : secondoNumero}
+    messaggio = json.dumps(messaggio)
 
-n1 = float(input("inserisci il primo numero "))
-op = input("inserisci l'operazione ")
-n2 = float(input("inserisci il secondo numero "))
+    s.sendto(messaggio.encode("UTF-8"), (SERVER_IP, SERVER_PORT))
 
-messaggio = {'primoNumero': n1, 'operazione': op, 'secondoNumero': n2}
-messaggio = json.dumps(messaggio) # oggetto in stringa
-
-s.sendall(messaggio.encode("UTF-8"))
-data=s.recv(1024)
-print("risulatto: ",data.decode())
+    #Ricevo il risultato
+    data = s.recv(1024)
+    print("Risultato: ", data.decode())
