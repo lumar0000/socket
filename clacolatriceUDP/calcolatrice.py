@@ -7,7 +7,6 @@ BUFFER_SIZE = 1024
 
 s = socket.socket(socket.AF_INET, socket. SOCK_DGRAM)
 while True:
-    #Blocco 1
     primoNumero = float(input("Inserisci il primo numero: "))
     operazione = input("Inserisci l'operazione(simbolo)")
     secondoNumero = float(input("Inserisci il secondo numero: "))
