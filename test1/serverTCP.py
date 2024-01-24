@@ -2,7 +2,7 @@ import socket
 
 # Configurazione del server
 IP = "127.0.0.1"
-PORTA = 65432
+PORTA = 22010
 DIM_BUFFER = 1024
 
 # Creazione della socket del server con Il costrutto with
@@ -27,4 +27,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock_server:
 
       # Stampa il messaggio ricevuto e invia una risposta al client
       print(f"Ricevuto messaggio dal client {sock_client}: {dati}")
-      sock_client.sendall("Messaggio ricevuto dal server". encode())
+      sock_client.sendall("Messaggio ricevuto dal server".encode())
+      if(dati == '0'):
+        break
+  sock_service.close()
