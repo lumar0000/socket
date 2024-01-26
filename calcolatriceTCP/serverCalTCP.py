@@ -15,17 +15,16 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock_server:
 
   while True:
     sock_service, address_clent = sock_server.accept()
-    
-    dati = sock_service.recv(DIM_BUFFER).decode()
-    dati = json.loads(dati)
-    n1=dati['primoNumero']
-    op=dati['operazione']
-    n2=dati['secondoNumero']
     with sock_service as sock_client:
         while True:
-            tot=0
+            dati = sock_client.recv(DIM_BUFFER).decode()
             if not dati:
                 break
+            dati = json.loads(dati)
+            n1=dati['primoNumero']
+            op=dati['operazione']
+            n2=dati['secondoNumero']
+            tot=0
             if op == '+':
                 tot = n1 + n2
             if op == '-':
@@ -39,7 +38,9 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock_server:
                     tot = "Impossibile"
             elif op == "%":
                 tot = n1 % n2
-
+            elif op == 0:
+                break
             # Stampa il messaggio ricevuto e invia una risposta al client
-            print(f"Ricevuto messaggio dal client {sock_service}: {dati}")
-            sock_service.sendall(str(tot).encode())
+            print(f"Ricevuto messaggio dal client {sock_client}: {dati}")
+            sock_client.sendall(str(tot).encode())
+        sock_client.close()

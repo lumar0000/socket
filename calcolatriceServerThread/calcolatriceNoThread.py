@@ -2,7 +2,7 @@ import socket
 import json
 
 HOST = "127.0.0.1"  # Indirizzo del server
-PORT = 65432        # Porta usata dal server
+PORT = 22224        # Porta usata dal server
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock_service:
   sock_service.connect((HOST, PORT))
@@ -20,3 +20,9 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock_service:
 
     data = sock_service.recv(1024)
     print('risultato: ', data.decode())
+
+
+
+
+
+#    messaggio = json.dumps(messaggio)
